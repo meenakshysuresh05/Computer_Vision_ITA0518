@@ -1,0 +1,19 @@
+import cv2
+import os
+
+image_path = r"C:\Users\menak\Downloads\image\L_messi.jpg"
+if not os.path.exists(image_path):
+    raise FileNotFoundError(f"Image not found: {image_path}")
+
+image = cv2.imread(image_path)
+if image is None:
+    raise ValueError("Failed to load image")
+
+small = cv2.resize(image, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+big = cv2.resize(image, (0, 0), fx=2.0, fy=2.0, interpolation=cv2.INTER_CUBIC)
+
+cv2.imshow("Original", image)
+cv2.imshow("Small (50%)", small)
+cv2.imshow("Big (200%)", big)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
